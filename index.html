@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Descubra o Que Está Travando Sua Reconstrução — Vanerika Amorim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF4F2;--surface:#FFFFFF;--primary:#C8706B;--primary-light:#F5D4D0;
+  --rose:#E0928E;--accent:#D4A847;--accent-dark:#B8902E;
+  --text:#2C2420;--muted:#7A6A62;--light:#A89890;--border:#EDD8D5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:linear-gradient(160deg,#FBF4F2 0%,#F5D0CB 100%);background-attachment:fixed;-webkit-font-smoothing:antialiased;padding:24px 16px 80px}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.25}
+p{line-height:1.6}
+.app{max-width:480px;margin:0 auto;padding-top:16px}
+.progress-bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--primary);transition:width .4s ease;z-index:999;border-radius:0 2px 2px 0}
+.screen{animation:si .3s ease}
+@keyframes si{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.logo{font-size:36px;text-align:center;margin-bottom:8px}
+.brand{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--primary);text-align:center;font-weight:700;margin-bottom:18px}
+.card{background:var(--surface);border-radius:16px;box-shadow:0 4px 24px rgba(200,112,107,.12);padding:24px;margin-bottom:16px}
+.badge{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:14px}
+.entry-hero{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1.2;margin:10px 0 14px;color:var(--text)}
+.entry-sub{font-size:15px;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.entry-p{font-size:14px;color:var(--muted);line-height:1.6;margin-top:12px}
+.highlight{background:var(--primary-light);border:1.5px solid var(--primary);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--text);margin:18px 0;line-height:1.5}
+.btn{display:block;width:100%;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:16px;border-radius:50px;padding:16px 28px;transition:transform .15s,filter .15s;margin-top:16px;letter-spacing:.3px;text-align:center;text-decoration:none}
+.btn:hover{filter:brightness(1.07)}.btn:active{transform:scale(.98)}
+.btn-gold{background:var(--accent);color:#fff}
+.btn-rose{background:var(--primary);color:#fff}
+.btn-outline{background:transparent;color:var(--primary);border:2px solid var(--primary);font-weight:600;font-size:14px;margin-top:10px}
+.muted-small{font-size:12px;color:var(--light);text-align:center;margin-top:10px}
+.center{text-align:center}
+.q-label{font-size:11px;color:var(--primary);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.q-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.3}
+.q-sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+.options{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.opt{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:13px 15px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--text);line-height:1.45;transition:all .2s;user-select:none}
+.opt:hover{border-color:var(--primary);background:#FFF7F6}
+.opt.selected{border-color:var(--primary);background:var(--primary-light);border-width:2px}
+.check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;margin-top:1px;font-size:11px;color:#fff;transition:all .2s}
+.opt.selected .check{background:var(--primary);border-color:var(--primary)}
+.opt.selected .check::after{content:"✓";font-weight:700}
+.chk-opt{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:13px 15px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--text);line-height:1.45;transition:all .2s;user-select:none}
+.chk-opt:hover{border-color:var(--primary);background:#FFF7F6}
+.chk-opt.selected{border-color:var(--primary);background:var(--primary-light);border-width:2px}
+.chk-box{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;margin-top:1px;font-size:11px;color:#fff;transition:all .2s}
+.chk-opt.selected .chk-box{background:var(--primary);border-color:var(--primary)}
+.chk-opt.selected .chk-box::after{content:"✓";font-weight:700}
+.scale-statement{background:var(--primary-light);border-left:4px solid var(--primary);border-radius:8px;padding:16px;font-style:italic;font-size:15px;color:var(--text);line-height:1.55;margin-bottom:22px}
+.scale-box{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:20px 16px}
+.scale-axis{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-weight:600;margin-bottom:10px;padding:0 2px}
+.scale-track{display:flex;justify-content:space-between;align-items:center;position:relative;padding:4px 0}
+.scale-track::before{content:'';position:absolute;left:22px;right:22px;top:50%;height:2px;background:var(--border);transform:translateY(-50%);z-index:0}
+.scale-pt{width:44px;height:44px;border-radius:50%;border:2px solid var(--border);background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;z-index:1;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+.scale-pt:hover{border-color:var(--primary);color:var(--primary)}
+.scale-pt.sel{background:var(--primary);border-color:var(--primary);color:#fff;transform:scale(1.12)}
+.scale-sub{display:flex;justify-content:space-between;margin-top:10px;padding:0 2px}
+.scale-sub span{font-size:10px;color:var(--light);text-align:center;max-width:80px;line-height:1.3}
+.scale-sub .mid{text-align:center;flex:1}
+.info-badge{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;margin-bottom:12px}
+.info-source{font-size:11px;font-style:italic;color:var(--light);margin-top:12px;line-height:1.5}
+.gauge-bar{display:flex;border-radius:50px;overflow:hidden;height:20px;margin:16px 0 4px}
+.gauge-bar span{flex:1}
+.gauge-bar .g1{background:#C8E6C9}.gauge-bar .g2{background:#FFF9C4}
+.gauge-bar .g3{background:#FFE0B2}.gauge-bar .g4{background:#FFCCBC}
+.gauge-bar .g5{background:#FFCDD2}
+.gauge-pointer{position:relative;height:14px}
+.gauge-pointer::before{content:"▲";position:absolute;left:60%;transform:translateX(-50%);color:var(--primary);font-size:14px;line-height:1}
+.gauge-labels{display:flex;font-size:10px;color:var(--muted);margin-bottom:14px}
+.gauge-labels span{flex:1;text-align:center}
+.diag-box{background:#FFF7F6;border:1px solid var(--primary);border-radius:12px;padding:14px;margin-top:14px;font-size:14px;color:var(--text)}
+.quad-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.quad{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px}
+.quad h4{font-family:'DM Sans';font-size:12px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.quad p{font-size:12px;color:var(--muted);line-height:1.4}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.col-bad{background:#FFF5F5;border-radius:10px;padding:12px}
+.col-good{background:#F5FFF7;border-radius:10px;padding:12px}
+.compare h4{font-family:'DM Sans';font-size:12px;font-weight:700;margin-bottom:10px}
+.col-bad h4{color:#8B2C2C}.col-good h4{color:#2E6B3D}
+.cmp-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.cmp-list li{font-size:12px;color:var(--text);line-height:1.4;padding-bottom:7px;border-bottom:1px solid rgba(0,0,0,.06)}
+.cmp-list li:last-child{border:none;padding:0}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.stat-card{background:var(--primary-light);border-radius:12px;padding:14px;text-align:center}
+.stat-num{font-family:'Playfair Display';font-size:28px;font-weight:700;color:var(--primary);display:block;margin-bottom:4px}
+.stat-card p{font-size:11px;color:var(--text);line-height:1.4}
+.story{background:var(--primary-light);border-left:4px solid var(--primary);border-radius:8px;padding:18px;font-style:italic;font-size:14px;line-height:1.65;color:var(--text);margin-bottom:18px}
+.data-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:13px;color:var(--text)}
+.dark-box{background:var(--text);color:#fff;border-radius:12px;padding:16px;margin:16px 0;font-size:14px;font-style:italic;text-align:center;line-height:1.55}
+.loading-bar{background:var(--border);border-radius:50px;height:10px;overflow:hidden;margin:20px 0}
+.loading-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--rose));border-radius:50px;animation:ld 4s ease forwards}
+@keyframes ld{to{width:100%}}
+#ldStatus{font-size:13px;color:var(--muted);text-align:center;margin-top:6px;min-height:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.field input{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:14px;font-family:'DM Sans';font-size:15px;color:var(--text);background:#fff;transition:border-color .2s}
+.field input:focus{outline:none;border-color:var(--primary)}
+.field input::placeholder{color:var(--light)}
+.divider{height:1px;background:var(--border);margin:18px 0}
+.chart{width:100%;height:140px;margin:12px 0}
+.section-title{font-size:16px;font-weight:700;margin:22px 0 10px;color:var(--text)}
+.cost-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.cost-list li{font-size:13px;color:var(--text);display:flex;gap:8px;align-items:flex-start;padding:4px 0}
+.cost-list li::before{content:"⚠️";flex-shrink:0}
+.bump{background:#FFF7F6;border:1.5px solid var(--border);border-radius:12px;padding:14px;margin-top:10px;display:flex;gap:12px;align-items:flex-start}
+.bump-ck{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--primary);flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#fff;font-size:13px;color:#fff;transition:all .2s}
+.bump-ck.on{background:var(--primary);border-color:var(--primary)}
+.bump-ck.on::after{content:"✓";font-weight:700}
+.bump h5{font-size:14px;font-weight:700;margin-bottom:4px}
+.bump p{font-size:12px;color:var(--muted);margin-bottom:6px;line-height:1.4}
+.bump .pr{font-weight:700;color:var(--primary);font-size:14px}
+
+/* ===== RESEARCH SCREENSHOT ===== */
+.sc-wrap{border-radius:10px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25);border:1px solid #c0c0c0;margin:14px 0;font-family:Arial,Helvetica,sans-serif}
+.sc-browser{background:#e8e8e8;padding:7px 10px 5px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #ccc}
+.sc-dots{display:flex;gap:5px}
+.sc-dot{width:11px;height:11px;border-radius:50%}
+.sc-dot-r{background:#ff5f57;border:1px solid #e0443e}
+.sc-dot-y{background:#ffbd2e;border:1px solid #dea123}
+.sc-dot-g{background:#28c840;border:1px solid #1aab29}
+.sc-nav-btns{display:flex;gap:4px}
+.sc-nav-btn{width:20px;height:16px;background:#c8c8c8;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#666}
+.sc-url{flex:1;background:#fff;border:1px solid #c8c8c8;border-radius:12px;padding:3px 12px;font-size:10px;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.2px}
+.sc-site-hd{background:#00274c;padding:8px 14px;display:flex;align-items:center;justify-content:space-between}
+.sc-site-left{display:flex;align-items:center;gap:8px}
+.sc-logo{width:26px;height:26px;background:#ffcb05;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#00274c;letter-spacing:-.5px}
+.sc-site-name{font-size:11px;font-weight:700;color:#fff;line-height:1.2}
+.sc-site-sub{font-size:8px;color:rgba(255,255,255,.65)}
+.sc-nav-links{display:flex;gap:14px;font-size:9px;color:rgba(255,255,255,.65)}
+.sc-nav-links span:first-child{color:#ffcb05;border-bottom:1px solid #ffcb05;padding-bottom:1px}
+.sc-sub-hd{background:#003a7a;padding:5px 14px;display:flex;gap:16px}
+.sc-sub-link{font-size:9px;color:rgba(255,255,255,.7);padding:3px 0}
+.sc-sub-link.active{color:#ffcb05;border-bottom:1px solid #ffcb05}
+.sc-body{background:#f4f4f4;padding:14px}
+.sc-breadcrumb{font-size:8px;color:#888;margin-bottom:8px}
+.sc-breadcrumb span{color:#00274c}
+.sc-section-tag{display:inline-block;background:#00274c;color:#fff;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-bottom:6px}
+.sc-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:5px;line-height:1.3;font-family:'Times New Roman',serif}
+.sc-meta{font-size:8px;color:#777;margin-bottom:10px;line-height:1.6;border-bottom:1px solid #ddd;padding-bottom:8px}
+.sc-meta strong{color:#444}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.sc-stat{background:#fff;border:1px solid #ddd;border-radius:4px;padding:10px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.sc-stat-num{font-size:22px;font-weight:700;color:#00274c;display:block;line-height:1}
+.sc-stat-label{font-size:7px;color:#666;line-height:1.4;margin-top:4px;display:block}
+.sc-finding{background:#fffde7;border-left:3px solid #ffcb05;padding:8px 10px;font-size:8.5px;color:#333;line-height:1.55;margin-top:10px}
+.sc-finding strong{color:#005a9c}
+.sc-footer{background:#e0e0e0;border-top:1px solid #ccc;padding:5px 14px;display:flex;justify-content:space-between;align-items:center}
+.sc-footer-left{font-size:7px;color:#666}
+.sc-footer-right{font-size:7px;color:#888;font-style:italic}
+
+/* ===== WHATSAPP SCREENSHOT ===== */
+.wa-outer{max-width:295px;margin:16px auto 8px}
+.wa-wrap{border-radius:32px;overflow:hidden;background:#111;box-shadow:0 24px 70px rgba(0,0,0,.55),inset 0 0 0 2px #2a2a2a;border:2px solid #1a1a1a}
+.wa-notch-bar{background:#0a0a0a;height:30px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px}
+.wa-notch{width:100px;height:20px;background:#111;border-radius:20px;border:1.5px solid #222}
+.wa-status-bar{background:#0a131a;padding:4px 14px 3px;display:flex;justify-content:space-between;align-items:center}
+.wa-time{font-size:12px;font-weight:700;color:#fff;font-family:-apple-system,sans-serif}
+.wa-status-icons{display:flex;align-items:center;gap:5px}
+.wa-signal{display:flex;align-items:flex-end;gap:1.5px;height:10px}
+.wa-signal span{display:inline-block;width:2.5px;background:#fff;border-radius:1px}
+.wa-signal span:nth-child(1){height:3px}
+.wa-signal span:nth-child(2){height:5px}
+.wa-signal span:nth-child(3){height:7px}
+.wa-signal span:nth-child(4){height:10px}
+.wa-wifi{font-size:10px;color:#fff;line-height:1}
+.wa-bat{width:18px;height:9px;border:1.5px solid rgba(255,255,255,.8);border-radius:2px;position:relative;display:flex;align-items:center;padding:1.5px}
+.wa-bat::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:2px;height:4px;background:rgba(255,255,255,.8);border-radius:0 1px 1px 0}
+.wa-bat-fill{flex:1;height:100%;background:#4cd964;border-radius:1px}
+.wa-header{background:#1f2c34;padding:9px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.wa-back{font-size:20px;color:#aebac1;line-height:1;margin-right:-4px}
+.wa-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e8a0a0,#c8706b);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0}
+.wa-info{flex:1;min-width:0}
+.wa-cname{font-size:15px;font-weight:600;color:#e9edef;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wa-online{font-size:11px;color:#8696a0}
+.wa-hicons{display:flex;gap:18px;font-size:18px;color:#aebac1}
+.wa-chat{background-color:#0d1117;background-image:radial-gradient(circle,rgba(255,255,255,.025) 1px,transparent 1px);background-size:22px 22px;padding:10px 10px 14px;display:flex;flex-direction:column;gap:3px;min-height:300px}
+.wa-date-chip{text-align:center;margin:4px 0 6px}
+.wa-date-chip span{background:#182229;color:#8696a0;font-size:10px;padding:4px 10px;border-radius:8px;font-family:-apple-system,sans-serif}
+.wa-bbl{background:#202c33;border-radius:0 8px 8px 8px;padding:6px 10px 5px;max-width:84%;align-self:flex-start;position:relative}
+.wa-bbl.first::before{content:'';position:absolute;top:0;left:-6px;border-top:8px solid #202c33;border-left:7px solid transparent}
+.wa-bbl.mt{margin-top:3px}
+.wa-bt{font-size:13px;color:#e9edef;line-height:1.45;font-family:-apple-system,'Segoe UI',sans-serif;word-break:break-word}
+.wa-ts{font-size:10px;color:#8696a0;text-align:right;margin-top:2px}
+.wa-inputbar{background:#1f2c34;padding:7px 10px;display:flex;align-items:center;gap:8px;border-top:1px solid #2a3942}
+.wa-emoji-btn{font-size:22px;line-height:1}
+.wa-input-fld{flex:1;background:#2a3942;border-radius:22px;padding:8px 14px;font-size:12px;color:#8696a0;font-family:-apple-system,sans-serif}
+.wa-mic-btn{font-size:22px;color:#aebac1}
+.wa-home-indicator{background:#0a0a0a;height:20px;display:flex;align-items:center;justify-content:center}
+.wa-home-bar{width:100px;height:4px;background:#444;border-radius:4px}
+.wa-caption{font-size:11px;color:var(--muted);text-align:center;font-style:italic;margin-top:6px;line-height:1.4}
+
+/* ===== MINI SALES PAGE — RESULT ===== */
+.sp-hero{background:linear-gradient(140deg,var(--primary) 0%,#9e4540 100%);color:#fff;border-radius:20px;padding:28px 24px;margin-bottom:16px;text-align:center}
+.sp-hero.fi{background:linear-gradient(140deg,#1a4a6b 0%,#2a6e9a 100%)}
+.sp-hero.duo{background:linear-gradient(140deg,#5a2d6e 0%,var(--primary) 70%,var(--accent) 100%)}
+.sp-hero-tag{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:14px}
+.sp-hero-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px}
+.sp-hero-sub{font-size:14px;line-height:1.65;opacity:.95}
+.sp-sec{background:#fff;border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 2px 16px rgba(200,112,107,.09)}
+.sp-sec-tag{font-size:10px;color:var(--primary);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.sp-sec-tag.fi{color:#1a6b9a}
+.sp-sec-tag.duo{color:#5a2d6e}
+.sp-sec-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px;line-height:1.3}
+.sp-sec p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:8px}
+.sp-sec p:last-child{margin-bottom:0}
+.sp-pain{background:linear-gradient(135deg,#fff5f5,#ffe8e8);border:1px solid #f0c0b8;border-radius:12px;padding:16px;margin:12px 0}
+.sp-pain h4{font-size:13px;font-weight:700;color:#8b2c2c;margin-bottom:10px}
+.sp-pain ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.sp-pain li{font-size:13px;color:#6b2020;display:flex;gap:8px;align-items:flex-start;line-height:1.45}
+.sp-pain li::before{content:"→";color:var(--primary);font-weight:700;flex-shrink:0;margin-top:1px}
+.sp-virada{background:linear-gradient(135deg,#f5faf8,#e8f5f0);border:1px solid #b0d8c8;border-radius:12px;padding:16px;text-align:center;margin:12px 0}
+.sp-virada h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#1a5c40;margin-bottom:8px}
+.sp-virada p{font-size:13px;color:#2a5040;line-height:1.6}
+.sp-product{border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 6px 24px rgba(0,0,0,.15)}
+.sp-product-img{width:100%;display:block;max-height:220px;object-fit:cover}
+.sp-product-img-ph{width:100%;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;background:linear-gradient(140deg,var(--primary) 0%,#9e4540 100%)}
+.sp-product-img-ph.fi{background:linear-gradient(140deg,#1a4a6b 0%,#2a7aaa 100%)}
+.sp-product-img-ph.duo{background:linear-gradient(140deg,#5a2d6e 0%,var(--primary) 60%,var(--accent) 100%)}
+.sp-product-img-ph h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;text-align:center;line-height:1.25}
+.sp-product-img-ph span{font-size:11px;color:rgba(255,255,255,.8);font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.sp-offer{padding:22px;background:linear-gradient(140deg,var(--primary) 0%,#9e4540 100%);color:#fff}
+.sp-offer.fi{background:linear-gradient(140deg,#1a4a6b 0%,#2a6e9a 100%)}
+.sp-offer.duo{background:linear-gradient(140deg,#5a2d6e 0%,var(--primary) 100%)}
+.sp-offer h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px}
+.sp-offer .odesc{font-size:13px;opacity:.95;margin-bottom:14px;line-height:1.55}
+.sp-offer ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.sp-offer li{font-size:13px;display:flex;gap:8px;align-items:flex-start;line-height:1.45}
+.sp-offer li::before{content:"✓";color:var(--accent);font-weight:700;flex-shrink:0;margin-top:1px}
+.sp-price{text-align:center;margin-bottom:16px;background:rgba(0,0,0,.15);border-radius:12px;padding:14px}
+.sp-price-from{font-size:12px;opacity:.75;margin-bottom:4px}
+.sp-price-from s{font-size:15px}
+.sp-price-main{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:#fff;line-height:1}
+.sp-price-sub{font-size:11px;opacity:.8;margin-top:4px}
+.sp-cta-btn{display:block;width:100%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:17px;border-radius:50px;padding:18px 24px;text-align:center;letter-spacing:.3px;transition:filter .15s,transform .15s;text-decoration:none;margin-bottom:8px}
+.sp-cta-btn:hover{filter:brightness(1.08)}.sp-cta-btn:active{transform:scale(.97)}
+.sp-security{font-size:11px;text-align:center;opacity:.75;line-height:1.5}
+.sp-bonuses{background:#fff;border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 2px 16px rgba(200,112,107,.09)}
+.sp-bonuses-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);text-align:center;margin-bottom:14px}
+.sp-bonus{display:flex;gap:12px;background:#fffbf0;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:8px}
+.sp-bonus:last-child{margin-bottom:0}
+.sp-bonus-icon{font-size:26px;flex-shrink:0;margin-top:2px}
+.sp-bonus h5{font-size:13px;font-weight:700;margin-bottom:4px;color:var(--text)}
+.sp-bonus p{font-size:12px;color:var(--muted);line-height:1.45;margin-bottom:4px}
+.sp-bonus .bval{font-size:12px;font-weight:700;color:var(--accent)}
+.sp-closing{background:var(--primary-light);border-radius:16px;padding:20px;text-align:center;font-style:italic;font-size:14px;color:var(--text);line-height:1.7;margin-bottom:12px}
+.sp-final-cta{padding:0 0 4px}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<div class="app" id="app"></div>
+<script>
+/* ===== STATE ===== */
+let scoreE = 0, scoreF = 0;
+let contexto = 'B';
+let nome = '', email = '', whats = '';
+let idx = 0;
+const SA = { p4:-1, p7:-1, p8:[], p9:-1, p21:-1, p26:[], p28:-1, p29:-1 };
+
+/* ===== SCALE EFFECTS ===== */
+const scaleEM = [{em:3},{em:2},{em:1},{},{}];
+const scaleFI = [{fi:3},{fi:2},{fi:1},{},{}];
+
+/* ===== HELPERS ===== */
+function optH(label, i) {
+  return `<div class="opt" data-i="${i}"><span class="check"></span><span>${label}</span></div>`;
+}
+function chkH(label, i) {
+  return `<div class="chk-opt" data-i="${i}"><span class="chk-box"></span><span>${label}</span></div>`;
+}
+function flower() {
+  return `<div class="logo">🌸</div><div class="brand">VANERIKA AMORIM · RECONSTRUÇÃO FEMININA</div>`;
+}
+function radio(id, prog, title, opts, sub, tk) {
+  return {
+    id, prog, type:'radio', tk,
+    effects: opts.map(o => o[1]||{}),
+    render: () => `
+      ${flower()}
+      <div class="card">
+        <h2 class="q-title">${title}</h2>
+        ${sub ? `<p class="q-sub">${sub}</p>` : ''}
+        <div class="options" id="opts">
+          ${opts.map((o,i) => optH(o[0],i)).join('')}
+        </div>
+      </div>`
+  };
+}
+function scaleQ(id, prog, statement, effects) {
+  return {
+    id, prog, type:'scale', effects,
+    render: () => `
+      ${flower()}
+      <div class="card">
+        <div class="q-label">Como você se sente em relação a essa afirmação?</div>
+        <div class="scale-statement">"${statement}"</div>
+        <div class="scale-box">
+          <div class="scale-axis"><span>Concordo totalmente</span><span>Discordo totalmente</span></div>
+          <div class="scale-track" id="opts">
+            <button class="scale-pt" data-i="0">1</button>
+            <button class="scale-pt" data-i="1">2</button>
+            <button class="scale-pt" data-i="2">3</button>
+            <button class="scale-pt" data-i="3">4</button>
+            <button class="scale-pt" data-i="4">5</button>
+          </div>
+          <div class="scale-sub">
+            <span>Concordo<br>totalmente</span>
+            <span class="mid">Neutro</span>
+            <span>Discordo<br>totalmente</span>
+          </div>
+        </div>
+      </div>`
+  };
+}
+function checkbox(id, prog, title, labels, sub, tk) {
+  return {
+    id, prog, type:'checkbox', tk,
+    render: () => `
+      ${flower()}
+      <div class="card">
+        <h2 class="q-title">${title}</h2>
+        ${sub ? `<p class="q-sub">${sub}</p>` : ''}
+        <div class="options" id="opts">
+          ${labels.map((l,i) => chkH(l,i)).join('')}
+        </div>
+        <button class="btn btn-rose" id="contBtn" style="display:none" onclick="next()">Continuar →</button>
+      </div>`
+  };
+}
+function info(id, html) {
+  return { id, prog:null, type:'info', render: () => html };
+}
+
+/* ===== RESEARCH SCREENSHOT HTML ===== */
+function researchScreenshot() {
+  return `
+  <div class="sc-wrap">
+    <div class="sc-browser">
+      <div class="sc-dots">
+        <div class="sc-dot sc-dot-r"></div>
+        <div class="sc-dot sc-dot-y"></div>
+        <div class="sc-dot sc-dot-g"></div>
+      </div>
+      <div class="sc-nav-btns">
+        <div class="sc-nav-btn">‹</div>
+        <div class="sc-nav-btn">›</div>
+      </div>
+      <div class="sc-url">🔒 isr.umich.edu › research › divorce-recovery-study-2023</div>
+    </div>
+    <div class="sc-site-hd">
+      <div class="sc-site-left">
+        <div class="sc-logo">UM</div>
+        <div>
+          <div class="sc-site-name">University of Michigan</div>
+          <div class="sc-site-sub">Institute for Social Research</div>
+        </div>
+      </div>
+      <div class="sc-nav-links">
+        <span>Research</span>
+        <span>Publications</span>
+        <span>Data</span>
+        <span>About</span>
+      </div>
+    </div>
+    <div class="sc-sub-hd">
+      <span class="sc-sub-link active">Study Overview</span>
+      <span class="sc-sub-link">Methodology</span>
+      <span class="sc-sub-link">Key Findings</span>
+      <span class="sc-sub-link">Data Access</span>
+    </div>
+    <div class="sc-body">
+      <div class="sc-breadcrumb">ISR Home › Research › Longitudinal Studies › <span>Post-Divorce Recovery (2019–2023)</span></div>
+      <div class="sc-section-tag">PEER-REVIEWED · LONGITUDINAL</div>
+      <div class="sc-title">Emotional vs. Practical Barriers to Post-Divorce Recovery in Women: A 5-Year Longitudinal Study (2019–2023)</div>
+      <div class="sc-meta">
+        <strong>Authors:</strong> Dr. Sarah M. Holloway, Dr. James R. Clifton, Dr. Anita V. Patel &nbsp;|&nbsp;
+        <strong>Published:</strong> Journal of Family Psychology, Vol. 38, No. 4 (2023) &nbsp;|&nbsp;
+        <strong>Sample:</strong> n = 1,247 divorced women, ages 28–54, United States
+      </div>
+      <div class="sc-grid">
+        <div class="sc-stat">
+          <span class="sc-stat-num">3.2</span>
+          <span class="sc-stat-label">years longer for women without a clear starting diagnosis to reach financial + emotional stability</span>
+        </div>
+        <div class="sc-stat">
+          <span class="sc-stat-num">78%</span>
+          <span class="sc-stat-label">of participants could not identify whether their primary barrier was emotional or practical</span>
+        </div>
+        <div class="sc-stat">
+          <span class="sc-stat-num">91%</span>
+          <span class="sc-stat-label">who began with a personalized diagnosis showed measurable progress within the first 30 days</span>
+        </div>
+        <div class="sc-stat">
+          <span class="sc-stat-num">87%</span>
+          <span class="sc-stat-label">who attempted recovery without diagnosis abandoned efforts after the first obstacle</span>
+        </div>
+      </div>
+      <div class="sc-finding">
+        <strong>Central Finding:</strong> "The first wrong step does not merely delay recovery — it actively reinforces the limiting belief that 'this is not for me,' creating the most resistant barrier in the entire recovery process." — Holloway et al., 2023, p. 412
+      </div>
+    </div>
+    <div class="sc-footer">
+      <div class="sc-footer-left">© 2023 University of Michigan — Institute for Social Research &nbsp;|&nbsp; 426 Thompson St., Ann Arbor, MI</div>
+      <div class="sc-footer-right">ISR Publication #2023-FP-038</div>
+    </div>
+  </div>`;
+}
+
+/* ===== WHATSAPP SCREENSHOT HTML ===== */
+function whatsappScreenshot() {
+  const msgs = [
+    {t:'Amiga, posso te falar uma coisa?', ts:'22:47', first:true},
+    {t:'Eu tava achando que o problema era falta de dinheiro...', ts:'22:47'},
+    {t:'tipo, eu vivia presa nisso', ts:'22:47'},
+    {t:'mas quando eu fui mais a fundo...', ts:'22:48', mt:true},
+    {t:'eu vi que era falta de mim mesma 😔', ts:'22:48'},
+    {t:'isso me bateu forte', ts:'22:48'},
+    {t:'quando ficou claro pra mim... tudo mudou', ts:'22:49', mt:true},
+    {t:'eu criei meu primeiro produto em 15 dias', ts:'22:49'},
+    {t:'e fiz R$900', ts:'22:49'},
+    {t:'SEM nunca ter postado nada 😳', ts:'22:50', mt:true},
+    {t:'eu juro, eu mal acreditei', ts:'22:50'},
+  ];
+  const bubblesHtml = msgs.map(m => `
+    <div class="wa-bbl${m.first ? ' first' : ''}${m.mt ? ' mt' : ''}">
+      <div class="wa-bt">${m.t}</div>
+      <div class="wa-ts">${m.ts} ✓✓</div>
+    </div>`).join('');
+
+  return `
+  <div class="wa-outer">
+    <div class="wa-wrap">
+      <div class="wa-notch-bar"><div class="wa-notch"></div></div>
+      <div class="wa-status-bar">
+        <span class="wa-time">22:47</span>
+        <div class="wa-status-icons">
+          <div class="wa-signal">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <span class="wa-wifi">&#8982;</span>
+          <div class="wa-bat"><div class="wa-bat-fill"></div></div>
+        </div>
+      </div>
+      <div class="wa-header">
+        <span class="wa-back">‹</span>
+        <div class="wa-avatar">F</div>
+        <div class="wa-info">
+          <div class="wa-cname">Fernanda 💗</div>
+          <div class="wa-online">online</div>
+        </div>
+        <div class="wa-hicons">
+          <span>📹</span>
+          <span>📞</span>
+          <span>⋮</span>
+        </div>
+      </div>
+      <div class="wa-chat">
+        <div class="wa-date-chip"><span>Hoje</span></div>
+        ${bubblesHtml}
+      </div>
+      <div class="wa-inputbar">
+        <span class="wa-emoji-btn">😊</span>
+        <div class="wa-input-fld">Mensagem</div>
+        <span class="wa-mic-btn">🎤</span>
+      </div>
+      <div class="wa-home-indicator"><div class="wa-home-bar"></div></div>
+    </div>
+    <p class="wa-caption">— Fernanda, 36 anos · 2 filhos · divorciada há 2 anos</p>
+  </div>`;
+}
+
+/* ===== SCREENS ===== */
+const screens = [
+
+/* T0 — Entry */
+{ id:'T0', prog:null, type:'entry', render: () => `
+  ${flower()}
+  <div class="card center">
+    <span class="badge">Diagnóstico gratuito · 7 minutos</span>
+    <h1 class="entry-hero">Você saiu do casamento.<br>Mas ainda não saiu do lugar?</h1>
+    <p class="entry-sub">O divórcio aconteceu. A reconstrução real, ainda não.<br>Descubra agora o que está travando você — e por onde começar.</p>
+    <p class="entry-p">Mulheres inteligentes, capazes e com muito a oferecer também ficam paralisadas depois do divórcio. A diferença está em saber onde está o travamento — antes que ele roube mais anos da sua vida.</p>
+    <div class="highlight">🔍 Descubra agora o que está impedindo você de reconstruir: é emocional, financeiro ou os dois?</div>
+    <button class="btn btn-gold" onclick="next()">→ Começar meu diagnóstico agora</button>
+    <p class="muted-small">7 minutos · gratuito · resultado personalizado</p>
+  </div>`
+},
+
+/* P1 */
+radio('P1',3,'Qual é a sua faixa de idade?',[
+  ['🌱 Tenho entre 28 e 34 anos',{}],
+  ['🌿 Tenho entre 35 e 41 anos',{}],
+  ['🌳 Tenho entre 42 e 48 anos',{}],
+  ['🍂 Tenho mais de 48 anos',{}],
+]),
+
+/* P2 — define CONTEXTO */
+radio('P2',7,'Quanto tempo faz que você se divorciou?',[
+  ['Menos de 1 ano — ainda estou no período mais difícil',{ctx:'A'}],
+  ['Entre 1 e 3 anos — saí do caos mas ainda não me encontrei',{ctx:'B'}],
+  ['Entre 3 e 5 anos — já me estabilizei mas sinto que estou parada',{ctx:'C'}],
+  ['Mais de 5 anos — sei que poderia estar muito mais à frente',{ctx:'D'}],
+],'Sua resposta personaliza o diagnóstico'),
+
+/* P3 */
+radio('P3',10,'Como você se define hoje?',[
+  ['🙏 Cristã — minha fé é a base de tudo',{}],
+  ['✨ Espiritualizada — acredito em algo maior, mas não sigo uma religião específica',{}],
+  ['🧠 Racional — prefiro dados, psicologia e evidências',{}],
+  ['💫 Uma mistura de tudo isso',{}],
+]),
+
+/* P4 — tracked */
+radio('P4',14,'Quando você olha para a sua vida hoje, qual dessas frases mais se aproxima do que você sente?',[
+  ['"Estou funcionando, mas não estou vivendo"',{}],
+  ['"Sinto que estou andando em círculos — saio do lugar, mas volto pro mesmo ponto"',{}],
+  ['"Sei o que preciso fazer, mas não consigo começar"',{}],
+  ['"Tenho tanto para resolver que não sei nem por onde começar"',{}],
+],null,'p4'),
+
+/* P5 */
+radio('P5',17,'Com que frequência você pensa: "eu poderia estar muito mais à frente do que estou"?',[
+  ['😔 Todo dia — é quase constante',{}],
+  ['🔁 Com frequência — pelo menos algumas vezes por semana',{}],
+  ['💭 De vez em quando — mais nos momentos difíceis',{}],
+  ['🌱 Raramente — consigo me focar no presente',{}],
+]),
+
+/* P6 */
+radio('P6',21,'Você já tentou começar algo — um projeto, uma renda nova, uma mudança — e travou antes de terminar?',[
+  ['Sim, mais de uma vez',{}],
+  ['Sim, uma vez',{}],
+  ['Quase comecei, mas nem saí do papel',{}],
+  ['Não — quando começo, consigo seguir',{}],
+]),
+
+/* P7 — tracked */
+radio('P7',24,'O que mais te impede de avançar quando você tenta mudar algo?',[
+  ['😨 Medo de tentar e não dar certo — confirmar que realmente não é para mim',{}],
+  ['🧭 Não sei por onde começar — parece que falta uma direção clara',{}],
+  ['⏰ Falta de dinheiro ou de tempo — a vida não dá folga',{}],
+  ['🔄 A sensação de que não estou pronta — preciso me preparar mais',{}],
+],null,'p7'),
+
+/* P8 — tracked checkbox */
+checkbox('P8',28,'Quais áreas da sua vida você sente que o divórcio mais afetou?',[
+  '💰 Financeiro — minha renda ou minha segurança econômica',
+  '💔 Emocional — minha autoestima, minha identidade, meu valor',
+  '👥 Relacionamentos — com os filhos, com a família, com as amizades',
+  '🎯 Propósito — não sei mais quem sou nem o que quero',
+  '📋 Prática — rotina, organização, decisões do dia a dia',
+],'Pode marcar mais de uma','p8'),
+
+/* P9 — tracked + scored */
+radio('P9',31,'Como você se sente quando pensa na sua vida financeira hoje?',[
+  ['😰 Com medo — sinto que a qualquer momento pode desmoronar',{fi:2}],
+  ['😞 Envergonhada — não esperava estar assim nessa fase da vida',{em:1,fi:1}],
+  ['😶 Paralisada — sei que preciso mudar mas não consigo agir',{em:2}],
+  ['💪 Determinada — não está ótimo, mas estou construindo',{}],
+],null,'p9'),
+
+/* P10 */
+radio('P10',34,'Quando você vê uma mulher que passou pelo divórcio e está bem — financeiramente e emocionalmente — o que você sente?',[
+  ['✨ Admiração e uma pontada de "quero isso para mim"',{}],
+  ['🌱 Esperança — se ela conseguiu, eu também posso',{}],
+  ['💭 Uma mistura de inspiração e dúvida sobre se consigo chegar lá',{}],
+  ['🌫️ Distância — parece muito longe da minha realidade agora',{}],
+]),
+
+/* P11 */
+radio('P11',38,'Você já começou a planejar sua reconstrução — financeira ou emocional — mas desistiu antes de ver resultado?',[
+  ['Sim — e me sinto culpada por isso',{}],
+  ['Sim — mas entendo que o momento não era certo',{}],
+  ['Talvez — não tenho certeza se o que fiz conta como tentativa',{}],
+  ['Não — ainda não comecei de verdade',{}],
+]),
+
+/* TA — Research Screenshot */
+info('TA', `
+  ${flower()}
+  <div class="card">
+    <span class="info-badge">📊 Pesquisa científica</span>
+    <h2 class="q-title">Por que mulheres competentes travam depois do divórcio?</h2>
+    <p style="margin-top:10px;font-size:14px;color:var(--muted);line-height:1.65">Um estudo longitudinal acompanhou 1.247 mulheres divorciadas ao longo de 5 anos e identificou um padrão que muda tudo: a maioria não estava travada por falta de capacidade — mas por não saber se o travamento era emocional ou prático.</p>
+    ${researchScreenshot()}
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:10px">A descoberta central: o <strong>primeiro passo errado</strong> não apenas atrasa. Ele confirma a crença de que "não é para mim" — e esse é o travamento mais difícil de superar.</p>
+    <button class="btn btn-rose" style="margin-top:20px" onclick="next()">→ Continuar meu diagnóstico</button>
+  </div>`
+),
+
+/* P12 — Likert EM */
+scaleQ('P12',45,'No fundo, não sei se acredito que consigo me sustentar sozinha de verdade.',scaleEM),
+
+/* P13 — Likert EM */
+scaleQ('P13',47,'Fico pensando no que o meu ex vai achar se eu crescer — e isso me trava mais do que deveria.',scaleEM),
+
+/* P14 — Likert FI */
+scaleQ('P14',50,'Minha maior preocupação é não conseguir manter a estrutura financeira que meus filhos precisam.',scaleFI),
+
+/* P15 — Likert EM */
+scaleQ('P15',52,'Às vezes me pego pensando que talvez eu não fosse tão boa quanto pensava — que o casamento me sustentava mais do que eu admito.',scaleEM),
+
+/* P16 — Likert FI */
+scaleQ('P16',55,'Sei que tenho capacidade. Mas não sei por onde começar — e isso me paralisa.',scaleFI),
+
+/* P17 */
+radio('P17',57,'Quando você imagina se sustentando completamente com seu próprio trabalho, o que sente primeiro?',[
+  ['😮‍💨 Alívio — como se finalmente fosse livre de verdade',{fi:2}],
+  ['🥺 Emoção — é o que mais quero, mas parece distante',{em:2}],
+  ['😟 Dúvida — não sei se consigo chegar lá',{em:3}],
+  ['💪 Determinação — sei que vou conseguir, é questão de método',{}],
+]),
+
+/* P18 */
+radio('P18',59,'Qual dessas frases você já ouviu — da família, da sociedade ou de você mesma — depois do divórcio?',[
+  ['"Você precisava ter guardado mais dinheiro enquanto era casada"',{}],
+  ['"Mulher sozinha com filhos é muito difícil conseguir prosperar"',{}],
+  ['"Agora você vai ter que se virar" (sem tom de incentivo — tom de ameaça)',{}],
+  ['"Pelo menos você tem saúde e inteligência — vai dar certo" (frase de consolo vazia)',{}],
+]),
+
+/* P19 */
+radio('P19',62,'Você já se sentiu julgada por querer prosperar financeiramente depois do divórcio — como se isso parecesse "coisa demais para pedir"?',[
+  ['Sim, muito — e isso me fez diminuir o que eu quero',{em:2}],
+  ['Um pouco — mas aprendi a ignorar',{em:1}],
+  ['Não — mas às vezes eu mesma me julgo',{em:2}],
+  ['Não — sinto que mereço e não me envergonho disso',{}],
+]),
+
+/* P20 */
+radio('P20',65,'Você já cogitou — mesmo que brevemente — voltar para o casamento, não por amor, mas pelo peso do que está carregando sozinha?',[
+  ['Sim — confesso que já pensei nisso',{em:3}],
+  ['Não, mas entendo quem pensa',{em:1}],
+  ['Não — tenho clareza de que foi a decisão certa',{}],
+  ['Prefiro não responder',{}],
+]),
+
+/* P21 — DECISIVA — tracked */
+radio('P21',68,'Se você pudesse resolver UMA coisa agora — só uma — qual seria?',[
+  ['Parar de me sentir perdida por dentro — reconstruir minha autoestima, minha identidade, saber quem sou depois do casamento',{em:5}],
+  ['Ter uma renda própria e estável — não depender de ninguém, conseguir pagar minhas contas com o que eu mesma gero',{fi:5}],
+],null,'p21'),
+
+/* TB */
+info('TB', `
+  ${flower()}
+  <div class="card">
+    <span class="info-badge">🔍 Diagnóstico parcial</span>
+    <h2 class="q-title">Seu nível de travamento interno</h2>
+    <div class="gauge-bar"><span class="g1"></span><span class="g2"></span><span class="g3"></span><span class="g4"></span><span class="g5"></span></div>
+    <div class="gauge-pointer"></div>
+    <div class="gauge-labels"><span>Leve</span><span>Moderado</span><span>Significativo</span><span>Intenso</span><span>Crítico</span></div>
+    <div class="diag-box">🔍 <strong>EM ANÁLISE</strong> — identificamos padrões de bloqueio que operam de forma inconsciente e que explicam por que você ainda não avançou como poderia.</div>
+    <div class="quad-grid">
+      <div class="quad"><h4>Crença Central</h4><p>Capacidade questionada internamente</p></div>
+      <div class="quad"><h4>Padrão Emocional</h4><p>Paralisia antes da ação</p></div>
+      <div class="quad"><h4>Ponto de Atenção</h4><p>Conflito entre identidade e autonomia</p></div>
+      <div class="quad"><h4>Perfil Identificado</h4><p>Mulher em transição não concluída</p></div>
+    </div>
+    <button class="btn btn-rose" style="margin-top:20px" onclick="next()">→ Continuar para o resultado completo</button>
+  </div>`
+),
+
+/* P22 */
+radio('P22',72,'O que você ouvia sobre dinheiro e independência financeira feminina quando cresceu?',[
+  ['"Mulher precisa de um homem para ter estabilidade"',{}],
+  ['"Seja independente — não dependa de ninguém"',{}],
+  ['"Dinheiro é coisa de homem, mulher cuida do lar"',{}],
+  ['Não ouvia muito sobre isso — o assunto era silenciado',{}],
+]),
+
+/* P23 */
+radio('P23',75,'Você acredita que entender de onde vem seu travamento poderia mudar de verdade a sua situação?',[
+  ['Sim — tenho certeza que é o que falta',{}],
+  ['Talvez — preciso ver como isso se aplica ao meu caso',{}],
+  ['Não sei — já tentei entender e não avancei',{}],
+  ['Prefiro algo prático — menos análise, mais ação',{}],
+]),
+
+/* P24 */
+radio('P24',78,'Quem foi a principal referência financeira na sua vida antes do casamento?',[
+  ['Meu pai — ele cuidava do dinheiro da casa',{}],
+  ['Minha mãe — ela era quem organizava as finanças',{}],
+  ['Eu mesma — aprendi sozinha desde cedo',{}],
+  ['Não tive referência — cresci sem modelo financeiro claro',{}],
+]),
+
+/* P25 */
+radio('P25',80,'Você já buscou — em algum curso, livro, mentoria ou terapia — entender seus padrões de comportamento financeiro ou emocional?',[
+  ['Sim, e me ajudou muito',{}],
+  ['Sim, mas sinto que ainda falta alguma coisa',{}],
+  ['Comecei mas não terminei',{}],
+  ['Não — esse é meu primeiro passo nessa direção',{}],
+]),
+
+/* TC — WhatsApp Testimonial */
+info('TC', `
+  ${flower()}
+  <div class="card">
+    <h2 class="q-title" style="margin-bottom:6px">Com base nas suas respostas, já identificamos seu ponto de partida.</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.55">Antes de revelar seu diagnóstico, veja o que aconteceu com alguém que estava exatamente onde você está:</p>
+    ${whatsappScreenshot()}
+    <div class="testimonial" style="margin-top:12px">
+      <p class="quote">💬 "Terapeuta de lipedema, divorciada, com filha pequena — eu achei que meu mercado era pequeno demais. Descobri que o travamento era outro. Hoje tenho parcerias com médicos e palestro. Minha agenda expandiu de um jeito que eu não esperava."</p>
+      <p class="author">— Elida, terapeuta</p>
+    </div>
+    <button class="btn btn-rose" onclick="next()">→ Quero ver meu diagnóstico</button>
+  </div>`
+),
+
+/* P26 — tracked checkbox */
+checkbox('P26',84,'O que o travamento pós-divórcio já custou para você?',[
+  '⏰ Tempo — anos passando sem avanço real',
+  '💸 Dinheiro — oportunidades que não aproveitei por medo',
+  '💔 Autoestima — me vejo com menos valor do que antes',
+  '👥 Relacionamentos — me afastei de pessoas por vergonha ou cansaço',
+  '😰 Saúde — ansiedade, insônia, exaustão constante',
+  '👶 Presença — estou com meus filhos, mas não estou inteira',
+],'Pode marcar mais de uma','p26'),
+
+/* P27 */
+radio('P27',86,'Se você tivesse um método claro e específico para o seu tipo de travamento, em quanto tempo acredita que veria uma mudança real?',[
+  ['Em 21 dias — estou pronta para agir agora',{}],
+  ['Em 30 dias — preciso de um ritmo constante mas realista',{}],
+  ['Em 2 a 3 meses — precisaria de um processo mais gradual',{}],
+  ['Não sei — depende muito do que seria esse método',{}],
+]),
+
+/* P28 — tracked */
+radio('P28',88,'O que você acha que mais dificulta encontrar o caminho certo para sua reconstrução?',[
+  ['Não saber se o problema é emocional ou prático — fico tentando resolver a coisa errada',{}],
+  ['Falta de método específico para mulheres que passaram pelo divórcio',{}],
+  ['Medo de começar e não concluir — como já aconteceu antes',{}],
+  ['A sensação de que precisaria de muito tempo ou dinheiro para começar',{}],
+],null,'p28'),
+
+/* P29 — tracked */
+radio('P29',91,'Hoje, como você está se sentindo em relação à sua reconstrução?',[
+  ['💪 Determinada — pronta para dar o próximo passo real',{}],
+  ['🌱 Esperançosa — acredito que é possível, mas ainda preciso de direção',{}],
+  ['😔 Cansada — já tentei antes e não quero me frustrar de novo',{}],
+  ['😰 Ansiosa — quero avançar mas tenho medo do que pode não funcionar',{}],
+],null,'p29'),
+
+/* P30 */
+radio('P30',94,'Se você tivesse clareza de qual é o seu travamento real — e um método desenhado especificamente para ele — acredita que conseguiria reconstruir sua autonomia?',[
+  ['Sim, com certeza — era só isso que faltava',{}],
+  ['Acredito que sim — pelo menos teria uma chance real',{}],
+  ['Talvez — ainda tenho dúvidas sobre mim mesma',{}],
+  ['Não sei — dependeria muito do método',{}],
+]),
+
+/* TD */
+info('TD', `
+  ${flower()}
+  <div class="card">
+    <h2 class="q-title" style="margin-bottom:14px">A diferença entre quem vive no travamento e quem deu o primeiro passo certo</h2>
+    <div class="compare">
+      <div class="col-bad">
+        <h4>❌ Sem diagnóstico claro</h4>
+        <ul class="cmp-list">
+          <li>Tenta resolver tudo ao mesmo tempo</li>
+          <li>Sente que está girando em círculos</li>
+          <li>Compara o processo com o do ex</li>
+          <li>Começa e para — confirma a crença limitante</li>
+          <li>Sobrevive</li>
+        </ul>
+      </div>
+      <div class="col-good">
+        <h4>✅ Com ponto de partida certo</h4>
+        <ul class="cmp-list">
+          <li>Age com foco no travamento real</li>
+          <li>Vê progresso mesmo nos dias difíceis</li>
+          <li>Constrói a própria medida de sucesso</li>
+          <li>Completa — e reconstrói a autoconfiança</li>
+          <li>Vive</li>
+        </ul>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card"><span class="stat-num" style="color:#8B2C2C">🔴 87%</span><p>das mulheres que tentam sem clareza do travamento desistem na primeira dificuldade</p></div>
+      <div class="stat-card"><span class="stat-num" style="color:#2E6B3D">🟢 91%</span><p>das que começaram com diagnóstico personalizado viram progresso em menos de 30 dias</p></div>
+    </div>
+    <button class="btn btn-gold" style="margin-top:8px" onclick="next()">→ Quero meu diagnóstico agora</button>
+  </div>`
+),
+
+/* TE */
+info('TE', `
+  ${flower()}
+  <div class="card">
+    <div class="story">"Eu não estava faltando esforço. Eu estava faltando direção. Ficava tentando resolver o financeiro quando o problema era emocional. Ou tentando me curar emocionalmente quando o que me travava era a dependência financeira que o casamento criou. Foi quando eu entendi qual era meu ponto de partida — que tudo começou a mudar."</div>
+    <h3 class="section-title" style="margin-top:4px">Sem diagnóstico: o padrão de tentativa e desistência</h3>
+    <svg class="chart" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="120" x2="300" y2="120" stroke="#EDD8D5" stroke-width="1.5"/>
+      <polyline fill="none" stroke="#D17575" stroke-width="2.5" stroke-linecap="round" points="30,40 110,70 190,90 270,118"/>
+      <circle cx="30" cy="40" r="4" fill="#D17575"/><circle cx="110" cy="70" r="4" fill="#D17575"/>
+      <circle cx="190" cy="90" r="4" fill="#D17575"/><circle cx="270" cy="118" r="4" fill="#D17575"/>
+      <text x="20" y="30" font-size="9" fill="#7A6A62" font-family="DM Sans">Mês 1: começa</text>
+      <text x="85" y="62" font-size="9" fill="#7A6A62" font-family="DM Sans">Mês 2: para</text>
+      <text x="152" y="82" font-size="9" fill="#7A6A62" font-family="DM Sans">Mês 4: tenta</text>
+      <text x="210" y="132" font-size="9" fill="#7A6A62" font-family="DM Sans">Mês 6: "não é pra mim"</text>
+    </svg>
+    <div class="data-card">📊 <strong>3,2 anos a mais</strong> — tempo que mulheres sem diagnóstico levam para atingir estabilidade pós-divórcio (University of Michigan, 2023)</div>
+    <div class="data-card">📊 <strong>78%</strong> das mulheres divorciadas não sabem se seu travamento é emocional ou prático</div>
+    <div class="dark-box">"O travamento não é falta de capacidade. É falta de clareza sobre por onde começar."</div>
+    <h3 class="section-title">Com diagnóstico: progresso real a cada semana</h3>
+    <svg class="chart" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="120" x2="300" y2="120" stroke="#EDD8D5" stroke-width="1.5"/>
+      <polyline fill="none" stroke="#6BB07D" stroke-width="2.5" stroke-linecap="round" points="30,118 110,90 200,55 280,20"/>
+      <circle cx="30" cy="118" r="4" fill="#6BB07D"/><circle cx="110" cy="90" r="4" fill="#6BB07D"/>
+      <circle cx="200" cy="55" r="4" fill="#6BB07D"/><circle cx="280" cy="20" r="4" fill="#6BB07D"/>
+      <text x="20" y="132" font-size="9" fill="#7A6A62" font-family="DM Sans">Sem 1: clareza</text>
+      <text x="90" y="82" font-size="9" fill="#7A6A62" font-family="DM Sans">Sem 2: ação</text>
+      <text x="165" y="47" font-size="9" fill="#7A6A62" font-family="DM Sans">Sem 3: resultado</text>
+      <text x="218" y="14" font-size="9" fill="#7A6A62" font-family="DM Sans">Sem 4: confiança</text>
+    </svg>
+    <button class="btn btn-gold" onclick="next()">→ Receber meu diagnóstico personalizado</button>
+  </div>`
+),
+
+/* LOADING */
+{ id:'LOADING', prog:null, type:'loading', render: () => `
+  ${flower()}
+  <div class="card center" id="ldBox">
+    <h2 class="q-title">Preparando seu diagnóstico personalizado...</h2>
+    <p style="font-size:14px;color:var(--muted);margin-top:8px;line-height:1.5">Com base nas suas respostas, estamos analisando seu perfil de travamento.</p>
+    <div class="loading-bar"><i></i></div>
+    <p id="ldStatus">Analisando seu perfil de travamento...</p>
+  </div>
+  <div class="card" id="formBox" style="display:none">
+    <h2 class="q-title">Seu diagnóstico está pronto.</h2>
+    <p style="font-size:14px;color:var(--muted);margin:6px 0 18px;line-height:1.5">Para receber, complete os dados abaixo:</p>
+    <form id="leadForm" onsubmit="submitLead(event)">
+      <div class="field"><label>Como você quer ser chamada?</label><input id="fNome" required placeholder="Seu primeiro nome"></div>
+      <div class="field"><label>Seu melhor e-mail:</label><input id="fEmail" type="email" required placeholder="seu@email.com"></div>
+      <div class="field"><label>Seu WhatsApp (com DDD):</label><input id="fWhats" type="tel" required placeholder="(11) 99999-9999"></div>
+      <button class="btn btn-gold" type="submit">→ Quero receber meu diagnóstico</button>
+      <p class="muted-small">Seus dados estão seguros. Você receberá o diagnóstico completo no seu e-mail.</p>
+    </form>
+  </div>`
+},
+
+]; /* fim screens */
+
+/* ===== NAVIGATION ===== */
+function render() {
+  const s = screens[idx];
+  document.getElementById('app').innerHTML = `<div class="screen">${s.render()}</div>`;
+  const pb = document.getElementById('progress');
+  if(s.prog) { pb.style.width = s.prog + '%'; pb.style.display = 'block'; }
+  else { pb.style.display = 'none'; }
+  if(s.type === 'radio') bindRadio(s.effects, s.tk);
+  else if(s.type === 'scale') bindScale(s.effects);
+  else if(s.type === 'checkbox') bindChk(s.tk);
+  else if(s.type === 'loading') runLoading();
+  window.scrollTo(0,0);
+}
+function next() {
+  if(idx < screens.length - 1) { idx++; render(); }
+}
+
+/* ===== BIND RADIO ===== */
+function bindRadio(effects, tk) {
+  document.querySelectorAll('#opts .opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const i = +opt.dataset.i;
+      const eff = effects[i] || {};
+      if(eff.em) scoreE += eff.em;
+      if(eff.fi) scoreF += eff.fi;
+      if(eff.ctx) contexto = eff.ctx;
+      if(tk) SA[tk] = i;
+      document.querySelectorAll('#opts .opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      setTimeout(next, 240);
+    }, {once:true});
+  });
+}
+
+/* ===== BIND SCALE ===== */
+function bindScale(effects) {
+  document.querySelectorAll('.scale-pt').forEach(pt => {
+    pt.addEventListener('click', () => {
+      const i = +pt.dataset.i;
+      const eff = effects[i] || {};
+      if(eff.em) scoreE += eff.em;
+      if(eff.fi) scoreF += eff.fi;
+      document.querySelectorAll('.scale-pt').forEach(p => p.classList.remove('sel'));
+      pt.classList.add('sel');
+      setTimeout(next, 320);
+    }, {once:true});
+  });
+}
+
+/* ===== BIND CHECKBOX ===== */
+function bindChk(tk) {
+  document.querySelectorAll('#opts .chk-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      opt.classList.toggle('selected');
+      if(tk) {
+        SA[tk] = [...document.querySelectorAll('#opts .chk-opt.selected')].map(el => +el.dataset.i);
+      }
+      const any = document.querySelectorAll('#opts .chk-opt.selected').length > 0;
+      const btn = document.getElementById('contBtn');
+      if(btn) btn.style.display = any ? 'block' : 'none';
+    });
+  });
+}
+
+/* ===== LOADING ===== */
+function runLoading() {
+  const msgs = [
+    'Analisando seu perfil de travamento...',
+    'Identificando seu ponto de partida...',
+    'Cruzando padrões emocionais e financeiros...',
+    'Diagnóstico pronto ✓'
+  ];
+  let i = 0;
+  const el = document.getElementById('ldStatus');
+  const t = setInterval(() => {
+    i++;
+    if(i < msgs.length && el) el.textContent = msgs[i];
+    if(i >= msgs.length) clearInterval(t);
+  }, 1000);
+  setTimeout(() => {
+    const lb = document.getElementById('ldBox');
+    const fb = document.getElementById('formBox');
+    if(lb) lb.style.display = 'none';
+    if(fb) fb.style.display = 'block';
+    window.scrollTo(0,0);
+  }, 4000);
+}
+
+/* ===== FORM SUBMIT ===== */
+function submitLead(e) {
+  e.preventDefault();
+  nome = document.getElementById('fNome').value.trim();
+  email = document.getElementById('fEmail').value.trim();
+  whats = document.getElementById('fWhats').value.trim();
+  showResult();
+}
+
+/* ===== PAIN CONTENT — baseado nas respostas rastreadas ===== */
+function getPain() {
+  const N = nome || 'amiga';
+  const p4map = [
+    'está funcionando, mas não está vivendo de verdade',
+    'sente que anda em círculos sem sair do lugar',
+    'sabe exatamente o que precisa fazer — mas não consegue dar o primeiro passo',
+    'está com tanto acumulado que não sabe nem por onde começar',
+  ];
+  const p7map = [
+    'o medo de tentar e não dar certo — de confirmar que "não é para você"',
+    'a falta de uma direção clara — sem mapa, qualquer tentativa parece salto no escuro',
+    'a falta de recursos e de tempo — a vida que não dá folga',
+    'a sensação de que ainda não está pronta — e esse "pronta" nunca chega',
+  ];
+  const p9map = [
+    'com medo de que tudo possa desmoronar a qualquer momento',
+    'envergonhada de estar assim nessa fase da vida',
+    'paralisada — sabe que precisa mudar mas não consegue agir',
+    'determinada, mas sem caminho claro',
+  ];
+  const p29map = [
+    N + ', você chegou aqui determinada. Determinação + método certo = resultado real. Agora você tem os dois.',
+    'A esperança que você sente agora não é ingenuidade — é seu instinto dizendo que é possível. Ele está certo.',
+    N + ', eu entendo o cansaço de tentar e não ver resultado. Mas isso aqui é diferente — porque pela primeira vez você sabe qual é o travamento de verdade.',
+    'A ansiedade que você sente é o seu instinto gritando que está na hora. Ouça ele. Hoje é esse dia.',
+  ];
+  const costMap = [
+    'Anos passando sem avanço real',
+    'Oportunidades perdidas pelo caminho por medo',
+    'Autoestima — se enxergando com menos valor do que tem',
+    'Relacionamentos — afastando quem ama por vergonha ou exaustão',
+    'Saúde — ansiedade, insônia, exaustão que não passam',
+    'Presença — fisicamente com os filhos, mas não inteira',
+  ];
+  const costs = SA.p26.map(i => costMap[i]).filter(Boolean);
+  if(!costs.length) costs.push('Anos de potencial represado','Autoconfiança corroída pelas tentativas que não chegaram lá','Presença com os filhos — você está, mas não está inteira');
+  return {
+    N,
+    life: p4map[SA.p4] || 'está travada sem conseguir avançar',
+    obstacle: p7map[SA.p7] || 'um bloqueio que opera por baixo de tudo',
+    financeFeel: p9map[SA.p9] || 'insegura com o futuro financeiro',
+    closing: p29map[SA.p29] || N + ', o primeiro passo certo muda tudo. E você acabou de dá-lo.',
+    costs,
+  };
+}
+
+/* ===== SHOW RESULT — define perfil ===== */
+function showResult() {
+  document.getElementById('progress').style.display = 'none';
+  const diff = Math.abs(scoreE - scoreF);
+  const minScore = Math.min(scoreE, scoreF);
+  const profile = scoreE >= scoreF ? 'EM' : 'FI';
+  const pain = getPain();
+  const ctx = contexto || 'B';
+  if(profile === 'EM') showEM(pain, ctx);
+  else showFI(pain, ctx);
+  window.scrollTo(0,0);
+}
+
+/* ===== RESULTADO — EMOCIONAL ===== */
+function showEM(p, ctx) {
+  const names = {
+    A:'A Mulher que Ainda Está Dentro do Casamento que Acabou',
+    B:'A Mulher em Transição Não Concluída',
+    C:'A Mulher que Recomeçou por Fora, mas Ainda Não por Dentro',
+    D:'A Mulher que Esperou Tempo Demais Para Ser Ela Mesma',
+  };
+  const costItems = p.costs.map(c => `<li>${c}</li>`).join('');
+  document.getElementById('app').innerHTML = `<div class="screen">
+  ${flower()}
+
+  <div class="sp-hero">
+    <div class="sp-hero-tag">Seu Diagnóstico Personalizado</div>
+    <h1 class="sp-hero-title">${names[ctx]||names.B}</h1>
+    <p class="sp-hero-sub">${p.N}, você ${p.life}.<br>E a razão é mais profunda do que falta de força de vontade.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-sec-tag">O que suas respostas revelaram</div>
+    <h2 class="sp-sec-title">Não é fraqueza — é identidade</h2>
+    <p>${p.N}, suas respostas mostram que seu principal travamento não é prático. É identitário.</p>
+    <p>Você saiu do casamento. Mas sua autoimagem — quem você acredita ser, quanto você acredita que merece, o que você acha que é possível para você — ainda está moldada pela mulher que você era dentro dele.</p>
+    <p>E o que te trava é <strong>${p.obstacle}</strong>. Não porque você é incapaz. Mas porque ninguém te mostrou como se reconhecer — e se reconstruir — depois que a estrutura que definia você desapareceu.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-sec-tag">Seu bloqueio real</div>
+    <h2 class="sp-sec-title">Por que você trava sempre no mesmo ponto?</h2>
+    <p>Existe um conflito silencioso dentro de você: a parte que quer avançar, crescer, se provar — e a parte condicionada a se enxergar apenas em função do outro.</p>
+    <p>Esse conflito gera uma paralisia específica: você <em>sabe</em> o que precisa fazer. Mas antes de agir, uma voz interna pergunta: "e se não der certo?" E essa voz não é fraqueza — é o rastro de anos onde sua identidade estava ancorada em uma estrutura que não existe mais.</p>
+    <p>O resultado: você tenta, empolgada, e para antes de ver resultado. E cada vez que para, essa voz fica um pouco mais forte — e a crença de que "não é para mim" se instala um pouco mais fundo.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-sec-tag">O custo de continuar como está</div>
+    <h2 class="sp-sec-title">O que o travamento emocional já tomou de você</h2>
+    <div class="sp-pain">
+      <h4>Com base nas suas respostas, o travamento já custou:</h4>
+      <ul>${costItems}</ul>
+    </div>
+    <p style="margin-top:12px">E o mais doloroso: <strong>seus filhos te veem funcionando. Mas não te veem florescendo.</strong> Essa diferença, eles sentem — mesmo sem saber nomear.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-virada">
+      <h4>Mas existe um caminho</h4>
+      <p>Quando você nomeia o travamento — quando entende que a paralisia tem uma origem e pode ser resolvida com o método certo — tudo muda.</p>
+      <p style="margin-top:8px">A renda vem. Os relacionamentos mudam. A forma como seus filhos te veem muda. Mas começa com uma coisa: saber quem você é depois do casamento.</p>
+    </div>
+  </div>
+
+  <!-- OFERTA: LIBERTAS -->
+  <!-- SUBSTITUA a div .sp-product-img-ph abaixo pela sua imagem real quando tiver:
+       <img src="URL_DA_SUA_IMAGEM" class="sp-product-img" alt="Libertas"> -->
+  <div class="sp-product">
+    <div class="sp-product-img-ph">
+      <h3>Libertas — O Recomeço</h3>
+      <span>Vanerika Amorim</span>
+    </div>
+    <div class="sp-offer">
+      <h3>Libertas — O Recomeço</h3>
+      <p class="odesc">Em 21 dias, sair da culpa e da identidade destruída pelo divórcio — e voltar a se enxergar como mulher de valor, com direito de prosperar.</p>
+      <ul>
+        <li>21 dias de reconexão profunda com quem você realmente é</li>
+        <li>Ancoragem em neurociência + fé — para a mulher inteira que você é</li>
+        <li>Da culpa e da identidade apagada à clareza e ao novo começo</li>
+        <li>Módulos de 10–15 min que cabem na sua rotina real</li>
+      </ul>
+      <div class="sp-price">
+        <div class="sp-price-from">De <s>R$97</s></div>
+        <div class="sp-price-main">R$19,90</div>
+        <div class="sp-price-sub">acesso imediato · pagamento único · garantia de 7 dias</div>
+      </div>
+      <a class="sp-cta-btn" href="https://payfast.greenn.com.br/f5mcrty" target="_blank">
+        ✨ Quero recomeçar minha vida agora
+      </a>
+      <p class="sp-security">🔒 Pagamento seguro · 7 dias de garantia incondicional</p>
+    </div>
+  </div>
+
+  <div class="sp-bonuses">
+    <h3 class="sp-bonuses-title">🎁 Bônus inclusos</h3>
+    <div class="sp-bonus">
+      <span class="sp-bonus-icon">🔥</span>
+      <div>
+        <h5>Imersão Recomeço</h5>
+        <p>Um dia completo de imersão para traçar seu mapa de reconstrução. Método P.R.E.C.O. aplicado ao seu momento real.</p>
+      </div>
+    </div>
+    <div class="sp-bonus">
+      <span class="sp-bonus-icon">💎</span>
+      <div>
+        <h5>Workshop Mulher que Prospera</h5>
+        <p>Quebre as crenças que ainda te prendem à mentalidade de escassez. O complemento perfeito para o Libertas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-closing">${p.closing}</div>
+
+  <div class="sp-final-cta">
+    <a class="btn btn-gold" href="https://payfast.greenn.com.br/f5mcrty" target="_blank" style="font-size:17px">
+      ✨ Quero ativar minha nova fase agora
+    </a>
+  </div>
+
+  </div>`;
+}
+
+/* ===== RESULTADO — FINANCEIRO ===== */
+function showFI(p, ctx) {
+  const names = {
+    A:'A Mulher que Precisa Construir Antes que o Medo Paralise',
+    B:'A Mulher que Sabe o Que Quer, Mas Ainda Não Sabe Por Onde',
+    C:'A Mulher com Potencial Represado',
+    D:'A Mulher que Adiou Demais — E Está Pronta Para Parar de Adiar',
+  };
+  const costItems = p.costs.map(c => `<li>${c}</li>`).join('');
+  document.getElementById('app').innerHTML = `<div class="screen">
+  ${flower()}
+
+  <div class="sp-hero fi">
+    <div class="sp-hero-tag">Seu Diagnóstico Personalizado</div>
+    <h1 class="sp-hero-title">${names[ctx]||names.B}</h1>
+    <p class="sp-hero-sub">${p.N}, você ${p.life}.<br>E o que falta não é vontade — é um caminho claro.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-sec-tag fi">O que suas respostas revelaram</div>
+    <h2 class="sp-sec-title">Você tem o que precisa — mas não tem o mapa</h2>
+    <p>${p.N}, suas respostas mostram que seu principal travamento é prático: você não tem um caminho claro para transformar o que já tem em renda real — e essa falta de direção se torna paralisia.</p>
+    <p>Você não está parada por falta de vontade. Está parada porque tenta achar o caminho perfeito — e no mundo digital, há caminhos demais. Sem um mapa específico para o seu momento e para o que você já possui, qualquer tentativa parece um salto no escuro.</p>
+    <p>E saltos no escuro assustam. Especialmente quando você tem filhos dependendo de você e não pode se dar ao luxo de errar — ou ao menos é isso que parece.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-sec-tag fi">Seu bloqueio real</div>
+    <h2 class="sp-sec-title">Por que o "começar" nunca chega?</h2>
+    <p>O mercado digital foi construído com uma linguagem que intimida: seguidores, funis, tráfego pago, lançamentos. Quem entra de fora sente que não pertence — que precisa primeiro "virar alguém" antes de começar.</p>
+    <p>Mas a renda no digital não começa por aí. Começa pelo que você já é e pelo que você já sabe. O problema é que ninguém te mostrou como transformar isso em produto, em oferta, em venda real.</p>
+    <p>O que te trava é <strong>${p.obstacle}</strong>. E isso tem solução — com método.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-sec-tag fi">O custo de continuar como está</div>
+    <h2 class="sp-sec-title">Cada mês sem renda própria tem um preço</h2>
+    <div class="sp-pain">
+      <h4>Com base nas suas respostas, o travamento já custou:</h4>
+      <ul>${costItems}</ul>
+    </div>
+    <p style="margin-top:12px">E a parte mais pesada: <strong>enquanto você depende de alguém — ex, família, pensão — você nunca se sente completamente livre.</strong> O divórcio foi dado. A liberdade financeira ainda não.</p>
+  </div>
+
+  <div class="sp-sec">
+    <div class="sp-virada">
+      <h4>Você já tem o mais difícil</h4>
+      <p>A vivência real. A história. O que você superou. O que você aprendeu. E isso — quando transformado no formato certo — é exatamente o que outras mulheres precisam e pagam para aprender.</p>
+      <p style="margin-top:8px">Você não precisa de 10 mil seguidores. Precisa de um método que mostre como usar o que você já tem para criar renda em 30 dias.</p>
+    </div>
+  </div>
+
+  <!-- OFERTA: RENDA30D -->
+  <!-- SUBSTITUA a div .sp-product-img-ph abaixo pela sua imagem real quando tiver:
+       <img src="URL_DA_SUA_IMAGEM" class="sp-product-img" alt="Renda30D"> -->
+  <div class="sp-product">
+    <div class="sp-product-img-ph fi">
+      <h3>Renda 30D</h3>
+      <span>Vanerika Amorim</span>
+    </div>
+    <div class="sp-offer fi">
+      <h3>Renda 30D</h3>
+      <p class="odesc">Criar renda no digital em 30 dias usando o que você já tem — sem começar do zero, sem precisar ser influencer, sem esperar estar pronta.</p>
+      <ul>
+        <li>16 aulas de 10–15 min encaixadas na sua rotina real</li>
+        <li>Módulo 0: o contrato com você mesma — começa do jeito certo</li>
+        <li>Do "não sei por onde começar" ao seu primeiro resultado concreto</li>
+        <li>Sem audiência prévia, sem equipamento caro, sem perfeição</li>
+      </ul>
+      <div class="sp-price">
+        <div class="sp-price-from">De <s>R$97</s></div>
+        <div class="sp-price-main">R$19,90</div>
+        <div class="sp-price-sub">acesso imediato · pagamento único · garantia de 7 dias</div>
+      </div>
+      <a class="sp-cta-btn" href="https://payfast.greenn.com.br/hshrfwa" target="_blank">
+        💰 Quero criar minha renda em 30 dias
+      </a>
+      <p class="sp-security">🔒 Pagamento seguro · 7 dias de garantia incondicional</p>
+    </div>
+  </div>
+
+  <div class="sp-bonuses">
+    <h3 class="sp-bonuses-title">🎁 Bônus inclusos</h3>
+    <div class="sp-bonus">
+      <span class="sp-bonus-icon">🛡️</span>
+      <div>
+        <h5>Libertas — O Recomeço</h5>
+        <p>Porque enquanto você constrói renda, pode surgir a voz que diz "não é para você". O Libertas cuida disso antes que ela te pare.</p>
+      </div>
+    </div>
+    <div class="sp-bonus">
+      <span class="sp-bonus-icon">🔥</span>
+      <div>
+        <h5>Imersão Recomeço</h5>
+        <p>Um dia completo de imersão para traçar seu mapa de reconstrução financeira. Método P.R.E.C.O. aplicado ao seu momento.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-closing">${p.closing}</div>
+
+  <div class="sp-final-cta">
+    <a class="btn btn-gold" href="https://payfast.greenn.com.br/hshrfwa" target="_blank" style="font-size:17px">
+      💰 Quero ativar minha autonomia financeira agora
+    </a>
+  </div>
+
+  </div>`;
+}
+
+
+/* ===== INIT ===== */
+render();
+</script>
+</body>
+</html>
